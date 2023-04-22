@@ -4,12 +4,9 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-def handle_text_message(event):
-    logger.info(f"Event: {event}")
 
+async def handle_text_message(event):
     reply_token = event.reply_token
     text = event.message.text
     response = TextMessage(text=f"{text}")
-
-    line_bot_api.reply_message(reply_token, response)
-    logger.info(f"Replied to {reply_token}: {text}")
+    await line_bot_api.reply_message(reply_token, response)

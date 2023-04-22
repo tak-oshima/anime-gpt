@@ -10,6 +10,7 @@ logger = logging.getLogger(__name__)
 
 router = APIRouter()
 
+
 @router.post("/webhook")
 async def webhook(request: Request):
     signature = request.headers["X-Line-Signature"]
@@ -17,16 +18,18 @@ async def webhook(request: Request):
     logger.info(f"Request body: {body}")
 
     try:
-        handler.handle(body, signature)
-        logger.info("Request body handled successfully")
+        await handler.handle(body, signature)
     except Exception as e:
         logger.error(f"Request body handling failed: {str(e)}")
-        return JSONResponse(content={"error": str(e)}, status_code=status.HTTP_400_BAD_REQUEST)
+        return JSONResponse(
+            content={"error": str(e)}, status_code=status.HTTP_400_BAD_REQUEST
+        )
 
     return JSONResponse(content={"message": "OK"})
 
+
 @handler.add(MessageEvent, message=TextMessage)
-def handle_message(event: MessageEvent):
+async def handle_message(event: MessageEvent):
     logger.info(f"Received message: {event.message.text}")
     if event.message.type == "text":
-        handle_text_message(event)
+        await handle_text_message(event)
