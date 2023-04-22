@@ -25,6 +25,6 @@ This project is a FastAPI webhook for the LINE Messaging API. It demonstrates ho
 
 ## Usage
 
-This webhook is set up to handle text messages. When a user sends a text message to your LINE bot, the webhook will reply with "You said: [text]".
+This webhook is set up to handle text messages. When a user sends a text message to your LINE bot, the webhook will echo the message back to the user.
 
 Feel free to customize the `app/handlers/message_handler.py` file to create your own message handling logic.
