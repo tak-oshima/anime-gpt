@@ -1,0 +1,11 @@
+# Ignore virtual environment
+anime-gpt-env/
+
+# Ignore cache and compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.env
+*.log
+*.sqlite
